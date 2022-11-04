@@ -5,7 +5,9 @@ enum token {
     IDENTIFICADOR,
     OP_ASIG,
     OP_ARIT,
-    INSTRUCCION,
     NL,
-    PAR
+    PAR,
+    SALIR,
+    CTE,
+    VAR
     };

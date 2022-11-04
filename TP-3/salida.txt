@@ -1,75 +1,95 @@
-Token: IDENTIFICADOR		Valor: a
-Token: INSTRUCCION		Valor: var
-Token: IDENTIFICADOR		Valor: a
-Token: INSTRUCCION		Valor: var
-Token: IDENTIFICADOR		Valor: b
-Token: OPERADOR DE ASIGNACION		Valor: =
-Token: REAL		Valor: 2.3
-Token: INSTRUCCION		Valor: var
-Token: IDENTIFICADOR		Valor: a
-Token: INSTRUCCION		Valor: cte
-Token: IDENTIFICADOR		Valor: log
-Token: IDENTIFICADOR		Valor: a
-Token: OPERADOR DE ASIGNACION		Valor: =
-Token: ENTERO		Valor: 3
-Token: OPERADOR ARITMETICO		Valor: +
-Token: IDENTIFICADOR		Valor: b
-Token: OPERADOR ARITMETICO		Valor: *
-Token: ENTERO		Valor: 2
-Token: INSTRUCCION		Valor: cte
-Token: IDENTIFICADOR		Valor: k
-Token: OPERADOR DE ASIGNACION		Valor: =
-Token: REAL		Valor: 1.2
-Token: IDENTIFICADOR		Valor: k
-Token: OPERADOR ARITMETICO		Valor: ^
-Token: ENTERO		Valor: 3
-Token: IDENTIFICADOR		Valor: e
-Token: IDENTIFICADOR		Valor: si
-Token: IDENTIFICADOR		Valor: n
-Token: PARENTESIS		Valor: (
-Token: IDENTIFICADOR		Valor: pi
-Token: OPERADOR ARITMETICO		Valor: /
-Token: ENTERO		Valor: 2
-Token: PARENTESIS		Valor: )
-Token: IDENTIFICADOR		Valor: a
-Token: OPERADOR DE ASIGNACION		Valor: =
-Token: IDENTIFICADOR		Valor: b
-Token: OPERADOR DE ASIGNACION		Valor: +=
-Token: ENTERO		Valor: 1
-Token: IDENTIFICADOR		Valor: a
-Token: IDENTIFICADOR		Valor: b
-Token: IDENTIFICADOR		Valor: k
-Token: OPERADOR DE ASIGNACION		Valor: =
-Token: ENTERO		Valor: 3
-Token: PARENTESIS		Valor: (
-Token: ENTERO		Valor: 2
-Token: OPERADOR ARITMETICO		Valor: +
-Token: ENTERO		Valor: 3
-Token: PARENTESIS		Valor: )
-Token: OPERADOR ARITMETICO		Valor: *
-Token: OPERADOR ARITMETICO		Valor: -
-Token: IDENTIFICADOR		Valor: k
-Token: REAL		Valor: 13.25
-Token: ENTERO		Valor: 12
-Token: IDENTIFICADOR		Valor: a
-Token: ENTERO		Valor: 3
-Token: IDENTIFICADOR		Valor: a
-Token: REAL		Valor: 2.4
-ERROR LEXICO - Constante real mal formada: 2.3.
-Token: ENTERO		Valor: 4
-Token: IDENTIFICADOR		Valor: a
-Token: REAL		Valor: 2.3
-Token: IDENTIFICADOR		Valor: a
-Token: OPERADOR ARITMETICO		Valor: +
-Token: ENTERO		Valor: 2
-Token: IDENTIFICADOR		Valor: a
-Token: OPERADOR DE ASIGNACION		Valor: =
-Token: IDENTIFICADOR		Valor: z
-Token: OPERADOR ARITMETICO		Valor: +
-Token: ENTERO		Valor: 2
-Token: IDENTIFICADOR		Valor: a
-Token: ENTERO		Valor: 2
-Token: OPERADOR ARITMETICO		Valor: *
-Token: OPERADOR ARITMETICO		Valor: *
-Token: ENTERO		Valor: 3
-Token: INSTRUCCION		Valor: salir
+Token: Identificador		Lexema: 'a'
+Token: 'NL'
+Token: var
+Token: Identificador		Lexema: 'a'
+Token: 'NL'
+Token: var
+Token: Identificador		Lexema: 'b'
+Token: Operador de asignacion		Lexema: '='
+Token: Real		Lexema: 2.3
+Token: 'NL'
+Token: var
+Token: Identificador		Lexema: 'a'
+Token: 'NL'
+Token: cte
+Token: Identificador		Lexema: log
+Token: 'NL'
+Token: Identificador		Lexema: 'a'
+Token: Operador de asignacion		Lexema: '='
+Token: Entero		Lexema: '3'
+Token: Operador aritmetico		Lexema: '+'
+Token: Identificador		Lexema: 'b'
+Token: Operador aritmetico		Lexema: '*'
+Token: Entero		Lexema: '2'
+Token: 'NL'
+Token: cte
+Token: Identificador		Lexema: 'k'
+Token: Operador de asignacion		Lexema: '='
+Token: Real		Lexema: 1.2
+Token: 'NL'
+Token: Identificador		Lexema: 'k'
+Token: Operador aritmetico		Lexema: '^'
+Token: Entero		Lexema: '3'
+Token: 'NL'
+Token: Identificador		Lexema: 'e'
+Token: 'NL'
+Token: Identificador		Lexema: sin
+Token: (
+Token: Identificador		Lexema: pi
+Token: Operador aritmetico		Lexema: '/'
+Token: Entero		Lexema: '2'
+Token: )
+Token: 'NL'
+Token: Identificador		Lexema: 'a'
+Token: Operador de asignacion		Lexema: '='
+Token: Identificador		Lexema: 'b'
+Token: Operador de asignacion		Lexema: +=
+Token: Entero		Lexema: '1'
+Token: 'NL'
+Token: Identificador		Lexema: 'a'
+Token: 'NL'
+Token: Identificador		Lexema: 'b'
+Token: 'NL'
+Token: Identificador		Lexema: 'k'
+Token: Operador de asignacion		Lexema: '='
+Token: Entero		Lexema: '3'
+Token: 'NL'
+Token: (
+Token: Entero		Lexema: '2'
+Token: Operador aritmetico		Lexema: '+'
+Token: Entero		Lexema: '3'
+Token: )
+Token: Operador aritmetico		Lexema: '*'
+Token: Operador aritmetico		Lexema: '-'
+Token: Identificador		Lexema: 'k'
+Token: 'NL'
+Token: Real		Lexema: 13.25
+Token: 'NL'
+ERROR LEXICO - Constante entera mal formada: 12a3
+Token: 'NL'
+ERROR LEXICO - Identificador mal formado: a#2.4
+Token: 'NL'
+ERROR LEXICO - Constante real mal formada: 2.3.4a2.3
+Token: 'NL'
+ERROR LEXICO - Cadena invalida: @@#;@
+Token: 'NL'
+Token: Identificador		Lexema: 'a'
+Token: Operador aritmetico		Lexema: '+'
+Token: Entero		Lexema: '2'
+Token: 'NL'
+Token: Identificador		Lexema: 'a'
+Token: Operador de asignacion		Lexema: '='
+Token: Identificador		Lexema: 'z'
+Token: Operador aritmetico		Lexema: '+'
+Token: Entero		Lexema: '2'
+Token: 'NL'
+Token: Identificador		Lexema: 'a'
+Token: 'NL'
+Token: Entero		Lexema: '2'
+Token: Operador aritmetico		Lexema: '*'
+Token: Operador aritmetico		Lexema: '*'
+Token: Entero		Lexema: '3'
+Token: 'NL'
+Token: salir
+Token: 'NL'
+Token: Fin de Archivo
