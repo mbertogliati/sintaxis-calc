@@ -1,0 +1,92 @@
+Token: Identificador	lexema: a
+Token: 'NL'
+Token: var
+Token: Identificador	lexema: a
+Token: 'NL'
+Token: var
+Token: Identificador	lexema: b
+Token: '='
+Token: nro	lexema: 2.3
+Token: 'NL'
+Token: var
+Token: Identificador	lexema: a
+Token: 'NL'
+Token: cte
+Token: Identificador	lexema: log
+Token: 'NL'
+Token: Identificador	lexema: a
+Token: '='
+Token: nro	lexema: 3
+Token: '+'
+Token: Identificador	lexema: b
+Token: '*'
+Token: nro	lexema: 2
+Token: 'NL'
+Token: cte
+Token: Identificador	lexema: k
+Token: '='
+Token: nro	lexema: 1.2
+Token: 'NL'
+Token: Identificador	lexema: k
+Token: '^'
+Token: nro	lexema: 3
+Token: 'NL'
+Token: Identificador	lexema: e
+Token: 'NL'
+Token: Identificador	lexema: sin
+Token: '('
+Token: Identificador	lexema: pi
+Token: '/'
+Token: nro	lexema: 2
+Token: ')'
+Token: 'NL'
+Token: Identificador	lexema: a
+Token: '='
+Token: Identificador	lexema: b
+Token: +=
+Token: nro	lexema: 1
+Token: 'NL'
+Token: Identificador	lexema: a
+Token: 'NL'
+Token: Identificador	lexema: b
+Token: 'NL'
+Token: Identificador	lexema: k
+Token: '='
+Token: nro	lexema: 3
+Token: 'NL'
+Token: '('
+Token: nro	lexema: 2
+Token: '+'
+Token: nro	lexema: 3
+Token: ')'
+Token: '*'
+Token: '-'
+Token: Identificador	lexema: k
+Token: 'NL'
+Token: nro	lexema: 13.25
+Token: 'NL'
+Error léxico: constante inválida: 12a3Token: 'NL'
+Error léxico: identificador inválido: a#2.4Token: 'NL'
+Error léxico REAL inválido: 2.3.4a2.3
+Token: 'NL'
+Error léxico: cadena desconocida: @@#;@Token: 'NL'
+Token: Identificador	lexema: a
+Token: '+'
+Token: nro	lexema: 2
+Token: 'NL'
+Token: Identificador	lexema: a
+Token: '='
+Token: Identificador	lexema: z
+Token: '+'
+Token: nro	lexema: 2
+Token: 'NL'
+Token: Identificador	lexema: a
+Token: 'NL'
+Token: nro	lexema: 2
+Token: '*'
+Token: '*'
+Token: nro	lexema: 3
+Token: 'NL'
+Token: salir
+Token: 'NL'
+Token: Fin de Archivo

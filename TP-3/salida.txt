@@ -1,0 +1,75 @@
+Token: IDENTIFICADOR		Valor: a
+Token: INSTRUCCION		Valor: var
+Token: IDENTIFICADOR		Valor: a
+Token: INSTRUCCION		Valor: var
+Token: IDENTIFICADOR		Valor: b
+Token: OPERADOR DE ASIGNACION		Valor: =
+Token: REAL		Valor: 2.3
+Token: INSTRUCCION		Valor: var
+Token: IDENTIFICADOR		Valor: a
+Token: INSTRUCCION		Valor: cte
+Token: IDENTIFICADOR		Valor: log
+Token: IDENTIFICADOR		Valor: a
+Token: OPERADOR DE ASIGNACION		Valor: =
+Token: ENTERO		Valor: 3
+Token: OPERADOR ARITMETICO		Valor: +
+Token: IDENTIFICADOR		Valor: b
+Token: OPERADOR ARITMETICO		Valor: *
+Token: ENTERO		Valor: 2
+Token: INSTRUCCION		Valor: cte
+Token: IDENTIFICADOR		Valor: k
+Token: OPERADOR DE ASIGNACION		Valor: =
+Token: REAL		Valor: 1.2
+Token: IDENTIFICADOR		Valor: k
+Token: OPERADOR ARITMETICO		Valor: ^
+Token: ENTERO		Valor: 3
+Token: IDENTIFICADOR		Valor: e
+Token: IDENTIFICADOR		Valor: si
+Token: IDENTIFICADOR		Valor: n
+Token: PARENTESIS		Valor: (
+Token: IDENTIFICADOR		Valor: pi
+Token: OPERADOR ARITMETICO		Valor: /
+Token: ENTERO		Valor: 2
+Token: PARENTESIS		Valor: )
+Token: IDENTIFICADOR		Valor: a
+Token: OPERADOR DE ASIGNACION		Valor: =
+Token: IDENTIFICADOR		Valor: b
+Token: OPERADOR DE ASIGNACION		Valor: +=
+Token: ENTERO		Valor: 1
+Token: IDENTIFICADOR		Valor: a
+Token: IDENTIFICADOR		Valor: b
+Token: IDENTIFICADOR		Valor: k
+Token: OPERADOR DE ASIGNACION		Valor: =
+Token: ENTERO		Valor: 3
+Token: PARENTESIS		Valor: (
+Token: ENTERO		Valor: 2
+Token: OPERADOR ARITMETICO		Valor: +
+Token: ENTERO		Valor: 3
+Token: PARENTESIS		Valor: )
+Token: OPERADOR ARITMETICO		Valor: *
+Token: OPERADOR ARITMETICO		Valor: -
+Token: IDENTIFICADOR		Valor: k
+Token: REAL		Valor: 13.25
+Token: ENTERO		Valor: 12
+Token: IDENTIFICADOR		Valor: a
+Token: ENTERO		Valor: 3
+Token: IDENTIFICADOR		Valor: a
+Token: REAL		Valor: 2.4
+ERROR LEXICO - Constante real mal formada: 2.3.
+Token: ENTERO		Valor: 4
+Token: IDENTIFICADOR		Valor: a
+Token: REAL		Valor: 2.3
+Token: IDENTIFICADOR		Valor: a
+Token: OPERADOR ARITMETICO		Valor: +
+Token: ENTERO		Valor: 2
+Token: IDENTIFICADOR		Valor: a
+Token: OPERADOR DE ASIGNACION		Valor: =
+Token: IDENTIFICADOR		Valor: z
+Token: OPERADOR ARITMETICO		Valor: +
+Token: ENTERO		Valor: 2
+Token: IDENTIFICADOR		Valor: a
+Token: ENTERO		Valor: 2
+Token: OPERADOR ARITMETICO		Valor: *
+Token: OPERADOR ARITMETICO		Valor: *
+Token: ENTERO		Valor: 3
+Token: INSTRUCCION		Valor: salir

@@ -1,0 +1,3 @@
+Token: INSTRUCCION		Valor: var
+Token: NL	
+Token: INSTRUCCION		Valor: cte
