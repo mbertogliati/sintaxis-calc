@@ -27,7 +27,7 @@ cte                                                             {yylval.cadena =
 \^                                                              {yylval.cadena = strdup(yytext); return '^';}
 \(                                                              {yylval.cadena = strdup(yytext); return '(';}
 \)                                                              {yylval.cadena = strdup(yytext); return ')';}
-=                                                               {yylval.cadena = strdup(yytext); return OP_ASIG;}
+=                                                               {yylval.cadena = strdup(yytext); return '=';}
 \+=                                                             {yylval.cadena = strdup(yytext); return OP_ASIG_SUMA;}
 -=                                                              {yylval.cadena = strdup(yytext); return OP_ASIG_RESTA;}
 \*=                                                             {yylval.cadena = strdup(yytext); return OP_ASIG_MULT;}

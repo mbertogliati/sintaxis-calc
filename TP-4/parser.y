@@ -6,7 +6,6 @@
 %code provides {
     void yyerror(const char *s);
     extern int nerrlex;
-    string linea;
 }
 %union{
     int entero;
@@ -18,7 +17,7 @@
 %left '*' '/'
 %precedence NEG
 %left '^'
-%right '=' OP_ASIG
+%right '='
 %right "+=" OP_ASIG_SUMA "-=" OP_ASIG_RESTA
 %right "*=" OP_ASIG_MULT "/=" OP_ASIG_DIV
 
@@ -37,63 +36,76 @@
 
 %%
 
-programa: 
+/*programa: 
           linea
-        | programa '\n' linea
+        | programa '\n' {{printf("\n");}}linea
+        ;*/
 
-linea:
+programa:
+        
           sentencia
+        | error
         | %empty
+        ;
         
 sentencia: 
           expresion
         | declaracion
-        | SALIR;
+        | SALIR {printf("Fin del programa\n");}
+        ;
         
 declaracion:
-          CTE IDENTIFICADOR inicializacion {printf("Define ID como Constante\n");}
+          CTE IDENTIFICADOR inicializacion {printf("Define ID como Constante \n");}
         | VAR IDENTIFICADOR inicializacion {printf("Define ID como Variable e inicializa\n");}
-        | VAR IDENTIFICADOR {printf("Define ID como Variable sin inicializar\n");};
+        | VAR IDENTIFICADOR {printf("Define ID como Variable sin inicializar\n");}
+        ;
 
 inicializacion:
-          '=' expresion //{printf("Inicializacion  <- ");};
+          '=' expresion {printf("Inicializacion\n");}
+          ;
 
 expresion:
           asignacion
-        | expresion-aditiva //{printf("Exp aditiva  <- ");};
+        | expresion-aditiva {printf("Expresion\n");};
+        ;
 
 asignacion:
-          IDENTIFICADOR OP_ASIG expresion
-          IDENTIFICADOR OP_ASIG_SUMA expresion {printf("Asignacion con Suma\n");}
-          IDENTIFICADOR OP_ASIG_RESTA expresion {printf("Asignacion con Resta\n");}
-          IDENTIFICADOR OP_ASIG_MULT expresion {printf("Asignacion con Multiplicacion\n");}
-          IDENTIFICADOR OP_ASIG_DIV expresion {printf("Asignacion con Division\n");}
-          ;
+          IDENTIFICADOR '=' expresion {printf("Asignacion\n");}
+        | IDENTIFICADOR OP_ASIG_SUMA expresion {printf("Asignacion con Suma\n");}
+        | IDENTIFICADOR OP_ASIG_RESTA expresion {printf("Asignacion con Resta\n");}
+        | IDENTIFICADOR OP_ASIG_MULT expresion {printf("Asignacion con Multiplicacion\n");}
+        | IDENTIFICADOR OP_ASIG_DIV expresion {printf("Asignacion con Division\n");}
+        ;
 
 expresion-aditiva:
           expresion-multiplicativa //{printf("Exp multiplicativa  <- ");}
         | expresion '+' expresion-multiplicativa {printf("Suma\n");}
-        | expresion '-' expresion-multiplicativa {printf("Resta\n");};
+        | expresion '-' expresion-multiplicativa {printf("Resta\n");}
+        ;
 
 expresion-multiplicativa:
           expresion-unaria //{printf("Exp unaria  <- ");}
         | expresion-multiplicativa '*' expresion-unaria {printf("Multiplicacion\n");}
-        | expresion-multiplicativa '/' expresion-unaria {printf("Division\n");};
+        | expresion-multiplicativa '/' expresion-unaria {printf("Division\n");}
+        ;
 
 expresion-unaria:
-          expresion-exponenciacion //{printf("Exp expon  <- ");}
-        | '-'expresion-exponenciacion %prec NEG {printf("Menos unario\n");}; 
+          expresion-exponenciacion {printf("Exponenciacion\n");}
+        | '-'expresion-exponenciacion %prec NEG {printf("Menos unario\n");}
+        ; 
 
 expresion-exponenciacion:
           valor //{printf("Valor  <- ");}
-        | valor '^' expresion-exponenciacion //{printf("Exponenciacion");};
+        | valor '^' expresion-exponenciacion //{printf("Exponenciacion");}
+        ;
 
 valor:
           ENTERO {printf("Entero\n");}
         | REAL {printf("Real\n");}
         | IDENTIFICADOR {printf("ID \n");}
         | '('expresion')'
-        | IDENTIFICADOR'('expresion')'{printf("Funcion\n");};
+        | IDENTIFICADOR'('expresion')'{printf("Funcion\n");}
+        ;
 
 
 
