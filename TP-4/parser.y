@@ -36,12 +36,12 @@
 
 %%
 
-/*programa: 
+programa: 
           linea
         | programa '\n' {{printf("\n");}}linea
-        ;*/
+        ;
 
-programa:
+linea:
         
           sentencia
         | error
@@ -49,7 +49,7 @@ programa:
         ;
         
 sentencia: 
-          expresion
+          expresion {printf("Expresion\n");}
         | declaracion
         | SALIR {printf("Fin del programa\n");}
         ;
@@ -61,12 +61,12 @@ declaracion:
         ;
 
 inicializacion:
-          '=' expresion {printf("Inicializacion\n");}
+          '=' expresion
           ;
 
 expresion:
           asignacion
-        | expresion-aditiva {printf("Expresion\n");};
+        | expresion-aditiva
         ;
 
 asignacion:
@@ -78,25 +78,25 @@ asignacion:
         ;
 
 expresion-aditiva:
-          expresion-multiplicativa //{printf("Exp multiplicativa  <- ");}
-        | expresion '+' expresion-multiplicativa {printf("Suma\n");}
-        | expresion '-' expresion-multiplicativa {printf("Resta\n");}
+          expresion-multiplicativa
+        | expresion-aditiva '+' expresion-multiplicativa {printf("Suma\n");}
+        | expresion-aditiva '-' expresion-multiplicativa {printf("Resta\n");}
         ;
 
 expresion-multiplicativa:
-          expresion-unaria //{printf("Exp unaria  <- ");}
+          expresion-unaria
         | expresion-multiplicativa '*' expresion-unaria {printf("Multiplicacion\n");}
         | expresion-multiplicativa '/' expresion-unaria {printf("Division\n");}
         ;
 
 expresion-unaria:
-          expresion-exponenciacion {printf("Exponenciacion\n");}
+          expresion-exponenciacion 
         | '-'expresion-exponenciacion %prec NEG {printf("Menos unario\n");}
         ; 
 
 expresion-exponenciacion:
-          valor //{printf("Valor  <- ");}
-        | valor '^' expresion-exponenciacion //{printf("Exponenciacion");}
+          valor
+        | valor '^' expresion-exponenciacion {printf("Exponenciacion\n");}
         ;
 
 valor:
