@@ -1,6 +1,6 @@
 var a
 var b = 2.3
-cte log
+var log
 cte k = 1.2
 a = 3 + b*2
 k^3
