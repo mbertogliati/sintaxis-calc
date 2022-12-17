@@ -45,6 +45,7 @@ simbolo *agregar_simbolo (char *name, int tipo){
     nuevo_simbolo->nombre = name;
     nuevo_simbolo->tipo = tipo;
     nuevo_simbolo->estaInicializado = false;
+    nuevo_simbolo->valor = 0;
 
     if(tabla_de_simbolos == NULL){
         tabla_de_simbolos = nuevo_simbolo;
