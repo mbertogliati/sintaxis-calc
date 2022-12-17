@@ -1,8 +1,30 @@
 #include "calc.h"
 #include <stdio.h>
+#include <math.h>
+
 simbolo* ultima_busqueda;
 
 simbolo *tabla_de_simbolos = NULL;
+
+int errores = 0;
+
+void agregar_constantes (void){
+    simbolo* e = malloc(sizeof(simbolo));
+    e->nombre = "e";
+    e->tipo = CTE;
+    e->estaInicializado = true;
+    e->valor = 2.718281828;
+
+    simbolo* pi = malloc(sizeof(simbolo));
+    pi->nombre = "pi";
+    pi->tipo = CTE;
+    pi->estaInicializado = true;
+    pi->valor = 3.141592653;
+    pi->sgte = NULL;
+
+    e->sgte = pi;
+    tabla_de_simbolos = e;
+}
 
 simbolo *buscar_simbolo (char const *name){
 
@@ -86,6 +108,17 @@ bool noEstaDeclarado(char *name){
         return false;
 }
 
+bool esCte(char *name){
+    if( (ultima_busqueda = buscar_simbolo(name))->tipo == CTE){
+        char mensaje[100];
+        sprintf(mensaje,"ERROR SEMANTICO - '%s' es constante y no se puede modificar", name);
+        yyerror(mensaje);
+        return true;
+    }
+    else
+        return false;
+}
+
 bool estaInicializado(char *name){
     
     if(noEstaDeclarado(name))
@@ -103,4 +136,48 @@ bool estaInicializado(char *name){
             return false;
         }
     }
+}
+
+bool noEstaInicializado(char *name){
+    
+    if(noEstaDeclarado(name))
+        return true;
+    else{
+        if(!(ultima_busqueda->estaInicializado)){
+            char mensaje[100];
+            sprintf(mensaje,"ERROR SEMANTICO - '%s' no esta inicializado", name);
+            yyerror(mensaje);
+
+            return true;
+        }else            
+            return false;
+    }
+}
+
+double aplicarFuncion(char *funcion, double valor){
+    if (strcmp(funcion, "sin") == 0){
+        return sin(valor);
+    }else 
+    if (strcmp(funcion, "cos") == 0){
+        return cos(valor);
+    }else 
+    if (strcmp(funcion, "tan") == 0){
+        return tan(valor);
+    }else 
+    if (strcmp(funcion, "asin") == 0){
+        return asin(valor);
+    }else 
+    if (strcmp(funcion, "acos") == 0){
+        return acos(valor);
+    }else 
+    if (strcmp(funcion, "atan") == 0){
+        return atan(valor);
+    }else 
+    if (strcmp(funcion, "sqrt") == 0){
+        return sqrt(valor);
+    }else 
+    if (strcmp(funcion, "log") == 0){
+        return log10(valor);
+    }
+    return 0;
 }

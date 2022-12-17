@@ -28,6 +28,7 @@
 %token <num> ENTERO 
 %token <num> REAL 
 %token <cadena> IDENTIFICADOR
+%token <cadena> FUNCION
 %token <cadena> SALIR 
 %token <cadena> CTE
 %token <cadena> VAR
@@ -36,7 +37,7 @@
 %output "parser.c"
 %define parse.error verbose
 
-%type<num> valor expresion-exponenciacion expresion-unaria expresion-multiplicativa expresion-aditiva expresion asignacion inicializacion sentencia
+%type<num> valor expresion-exponenciacion expresion-unaria expresion-multiplicativa expresion-aditiva expresion asignacion
 
 
 %%
@@ -47,26 +48,21 @@ programa:
         ;
 
 linea:
-        
-          sentencia {printf("%lf\n", $sentencia);}
-        | declaracion
+          sentencia
         | %empty
         ;
         
 sentencia: 
-          expresion {$$ = $1;}
-        | SALIR {printf("Fin del programa\n"); return 0;}
+          expresion {printf("%lf\n", $1);}
+        | declaracion
+        | SALIR { return 4; }
         ;
         
 declaracion:
-          CTE IDENTIFICADOR inicializacion {if (estaDeclarado($IDENTIFICADOR)) YYABORT; agregar_simbolo($IDENTIFICADOR,CTE); modificar_valor($IDENTIFICADOR, $inicializacion); printf("%s: %lf\n", buscar_simbolo($IDENTIFICADOR)->nombre, valor($IDENTIFICADOR));}
-        | VAR IDENTIFICADOR inicializacion {if (estaDeclarado($IDENTIFICADOR)) YYABORT; agregar_simbolo($IDENTIFICADOR,VAR); modificar_valor($IDENTIFICADOR, $inicializacion); printf("%s: %lf\n", buscar_simbolo($IDENTIFICADOR)->nombre, valor($IDENTIFICADOR));}
+          CTE IDENTIFICADOR '=' expresion {if (estaDeclarado($IDENTIFICADOR)) YYABORT; agregar_simbolo($IDENTIFICADOR,CTE); modificar_valor($IDENTIFICADOR, $expresion); printf("%s: %lf", buscar_simbolo($IDENTIFICADOR)->nombre, valor($IDENTIFICADOR));}
+        | VAR IDENTIFICADOR '=' expresion {if (estaDeclarado($IDENTIFICADOR)) YYABORT; agregar_simbolo($IDENTIFICADOR,VAR); modificar_valor($IDENTIFICADOR, $expresion); printf("%s: %lf", buscar_simbolo($IDENTIFICADOR)->nombre, valor($IDENTIFICADOR));}
         | VAR IDENTIFICADOR {if (estaDeclarado($IDENTIFICADOR)) YYABORT; agregar_simbolo($IDENTIFICADOR,VAR); printf("Se declaro '%s' sin inicializar.\n", buscar_simbolo($IDENTIFICADOR)->nombre);}
         ;
-
-inicializacion:
-          '=' expresion {$$ = $expresion;}
-          ;
 
 expresion:
           asignacion {$$ = $1;}
@@ -74,11 +70,11 @@ expresion:
         ;
 
 asignacion:
-          IDENTIFICADOR '=' expresion {if(noEstaDeclarado($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, $expresion); $$ = $expresion;}
-        | IDENTIFICADOR OP_ASIG_SUMA expresion {if (!estaInicializado($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)+$expresion); $$ = valor($IDENTIFICADOR); }
-        | IDENTIFICADOR OP_ASIG_RESTA expresion {if (!estaInicializado($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)-$expresion); $$ = valor($IDENTIFICADOR); }
-        | IDENTIFICADOR OP_ASIG_MULT expresion {if (!estaInicializado($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)*$expresion); $$ = valor($IDENTIFICADOR); }
-        | IDENTIFICADOR OP_ASIG_DIV expresion {if (!estaInicializado($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)/$expresion); $$ = valor($IDENTIFICADOR); }
+          IDENTIFICADOR '=' expresion {if(noEstaDeclarado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, $expresion); $$ = $expresion;}
+        | IDENTIFICADOR OP_ASIG_SUMA expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)+$expresion); $$ = valor($IDENTIFICADOR); }
+        | IDENTIFICADOR OP_ASIG_RESTA expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)-$expresion); $$ = valor($IDENTIFICADOR); }
+        | IDENTIFICADOR OP_ASIG_MULT expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)*$expresion); $$ = valor($IDENTIFICADOR); }
+        | IDENTIFICADOR OP_ASIG_DIV expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYABORT; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)/$expresion); $$ = valor($IDENTIFICADOR); }
         ;
 
 expresion-aditiva:
@@ -106,15 +102,12 @@ expresion-exponenciacion:
 valor:
           ENTERO {$valor = $ENTERO;}
         | REAL {$valor = $REAL;}
-        | IDENTIFICADOR {if(!estaInicializado($IDENTIFICADOR)) YYABORT; $valor = valor($IDENTIFICADOR);}
+        | IDENTIFICADOR {if(noEstaInicializado($IDENTIFICADOR)) YYABORT; $valor = valor($IDENTIFICADOR);}
         | '('expresion')'{$valor = $expresion;}
-        | IDENTIFICADOR'('expresion')'{printf("Funcion\n");}
+        | FUNCION'('expresion')'{ $valor = aplicarFuncion($FUNCION, $expresion);}
         ;
-
-
 
 %%
 void yyerror(const char *s){
 	printf("%s\n",s);
-	return;
 }

@@ -21,8 +21,9 @@ typedef struct simbolo{
 
 extern simbolo *tabla_de_simbolos;
 
-/* The symbol table: a chain of 'struct symrec'. */
+extern int errores;
 
+void agregar_constantes(void);
 simbolo *agregar_simbolo (char *name, int tipo);
 simbolo *buscar_simbolo (char const *name);
 simbolo *modificar_valor(char const *name, double nuevo_valor);
@@ -31,5 +32,9 @@ double valor(char* name);
 bool estaDeclarado(char* name);
 bool noEstaDeclarado(char* name);
 bool estaInicializado(char* name);
+bool esFuncion(char *funcion);
+double aplicarFuncion(char *funcion, double valor);
+bool esCte(char *name);
+bool noEstaInicializado(char *name);
 
 #endif
