@@ -4,7 +4,7 @@
 
 
 //Matias Nahuel Cotens Legajo: 202682-0
-//Guadalupe García
+//Guadalupe García Legajo: 204718-4
 //Mateo Bertogliati Legajo: 203413-0
 
 char *token_names[] = {"EOF", "Entero", "Real", "Identificador", "Operador de asignacion", "Operador aritmetico", "NL", "Parentesis", "SALIR", "CTE", "VAR"};
