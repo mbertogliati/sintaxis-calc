@@ -16,13 +16,11 @@
     char *cadena;
 }
 
+%right '=' "+=" OP_ASIG_SUMA "-=" OP_ASIG_RESTA "*=" OP_ASIG_MULT "/=" OP_ASIG_DIV
 %left '+' '-'
 %left '*' '/'
 %precedence NEG
 %left '^'
-%right '='
-%right "+=" OP_ASIG_SUMA "-=" OP_ASIG_RESTA
-%right "*=" OP_ASIG_MULT "/=" OP_ASIG_DIV
 
 
 %token YYEOF
