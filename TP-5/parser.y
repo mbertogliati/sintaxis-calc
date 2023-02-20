@@ -70,38 +70,18 @@ declaracion:
         ;
 
 expresion:
-          asignacion {$$ = $1;}
-        | expresion-aditiva {$$ = $1;}
-        ;
-
-asignacion:
           IDENTIFICADOR '=' expresion {if(noEstaDeclarado($IDENTIFICADOR) || esCte($IDENTIFICADOR))YYERROR; modificar_valor($IDENTIFICADOR, $expresion); $$ = $expresion;}
         | IDENTIFICADOR OP_ASIG_SUMA expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)+$expresion); $$ = valor($IDENTIFICADOR); }
         | IDENTIFICADOR OP_ASIG_RESTA expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)-$expresion); $$ = valor($IDENTIFICADOR); }
         | IDENTIFICADOR OP_ASIG_MULT expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)*$expresion); $$ = valor($IDENTIFICADOR); }
         | IDENTIFICADOR OP_ASIG_DIV expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)/$expresion); $$ = valor($IDENTIFICADOR); }
-        ;
-
-expresion-aditiva:
-          expresion-multiplicativa {$$ = $1;}
-        | expresion-aditiva '+' expresion-multiplicativa {$$ = $1 + $3;}
-        | expresion-aditiva '-' expresion-multiplicativa {$$ = $1 - $3;}
-        ;
-
-expresion-multiplicativa:
-          expresion-unaria {$$ = $1;}
-        | expresion-multiplicativa '*' expresion-unaria {$$ = $1 * $3;}
-        | expresion-multiplicativa '/' expresion-unaria {$$ = $1 / $3;}
-        ;
-
-expresion-unaria:
-          expresion-exponenciacion {$$ = $1;}
-        | '-'expresion-exponenciacion %prec NEG {$$ = -$2;}
-        ; 
-
-expresion-exponenciacion:
-          valor {$$ = $valor;}
-        | valor '^' expresion-exponenciacion {$$ = pow($valor, $3);}
+        | expresion '+' expresion {$$ = $1 + $3;}
+        | expresion '-' expresion {$$ = $1 - $3;}
+        | expresion '*' expresion {$$ = $1 * $3;}
+        | expresion '/' expresion {$$ = $1 / $3;}
+        | '-'expresion %prec NEG {$$ = -$2;}
+        | valor '^' expresion {$$ = pow($valor, $3);}
+        | valor {$$ = $valor;}
         ;
 
 valor:
