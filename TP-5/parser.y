@@ -39,7 +39,7 @@
 %output "parser.c"
 %define parse.error verbose
 
-%type<num> valor expresion-exponenciacion expresion-unaria expresion-multiplicativa expresion-aditiva expresion asignacion
+%type<num> valor expresion-aritmetica asignacion expresion
 %type<cadena> declaracion sentencia
 
 
@@ -70,17 +70,23 @@ declaracion:
         ;
 
 expresion:
-          IDENTIFICADOR '=' expresion {if(noEstaDeclarado($IDENTIFICADOR) || esCte($IDENTIFICADOR))YYERROR; modificar_valor($IDENTIFICADOR, $expresion); $$ = $expresion;}
-        | IDENTIFICADOR OP_ASIG_SUMA expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)+$expresion); $$ = valor($IDENTIFICADOR); }
-        | IDENTIFICADOR OP_ASIG_RESTA expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)-$expresion); $$ = valor($IDENTIFICADOR); }
-        | IDENTIFICADOR OP_ASIG_MULT expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)*$expresion); $$ = valor($IDENTIFICADOR); }
-        | IDENTIFICADOR OP_ASIG_DIV expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)/$expresion); $$ = valor($IDENTIFICADOR); }
-        | expresion '+' expresion {$$ = $1 + $3;}
-        | expresion '-' expresion {$$ = $1 - $3;}
-        | expresion '*' expresion {$$ = $1 * $3;}
-        | expresion '/' expresion {$$ = $1 / $3;}
-        | '-'expresion %prec NEG {$$ = -$2;}
-        | valor '^' expresion {$$ = pow($valor, $3);}
+          asignacion
+          | expresion-aritmetica
+          ;
+asignacion:
+        IDENTIFICADOR '=' expresion {if(noEstaDeclarado($IDENTIFICADOR) || esCte($IDENTIFICADOR))YYERROR; modificar_valor($IDENTIFICADOR, $3); $$ = $3;}
+        | IDENTIFICADOR OP_ASIG_SUMA expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)+$3); $$ = valor($IDENTIFICADOR); }
+        | IDENTIFICADOR OP_ASIG_RESTA expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)-$3); $$ = valor($IDENTIFICADOR); }
+        | IDENTIFICADOR OP_ASIG_MULT expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)*$3); $$ = valor($IDENTIFICADOR); }
+        | IDENTIFICADOR OP_ASIG_DIV expresion {if (noEstaInicializado($IDENTIFICADOR) || esCte($IDENTIFICADOR)) YYERROR; modificar_valor($IDENTIFICADOR, valor($IDENTIFICADOR)/$3); $$ = valor($IDENTIFICADOR); }
+        ;
+expresion-aritmetica:
+        expresion-aritmetica '+' expresion-aritmetica {$$ = $1 + $3;}
+        | expresion-aritmetica '-' expresion-aritmetica {$$ = $1 - $3;}
+        | expresion-aritmetica '*' expresion-aritmetica {$$ = $1 * $3;}
+        | expresion-aritmetica '/' expresion-aritmetica {$$ = $1 / $3;}
+        | '-'expresion-aritmetica %prec NEG {$$ = -$2;}
+        | valor '^' expresion-aritmetica {$$ = pow($valor, $3);}
         | valor {$$ = $valor;}
         ;
 
